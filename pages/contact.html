@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us | BioEthix Pharmaceuticals – Bengaluru, India</title>
+    <meta name="description" content="Contact BioEthix Pharmaceuticals for product inquiries, distribution partnerships, or corporate queries. Call +91-8069278000 or email info@bioethix.com.">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://www.bioethix.com/contact.html">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.bioethix.com/contact.html">
+    <meta property="og:title" content="Contact Us | BioEthix Pharmaceuticals">
+    <meta property="og:description" content="Reach BioEthix for product inquiries, distribution, or corporate queries. Bengaluru, India.">
+    <meta property="og:image" content="https://www.bioethix.com/logo.jpeg">
+    <meta property="og:site_name" content="BioEthix Pharmaceuticals">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Contact Us | BioEthix Pharmaceuticals">
+    <meta name="twitter:description" content="Reach BioEthix for product inquiries, distribution, or corporate queries.">
+    <meta name="twitter:image" content="https://www.bioethix.com/logo.jpeg">
+
+    <!-- Schema.org: LocalBusiness / ContactPage -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      "name": "BioEthix Pharmaceuticals Pvt. Ltd.",
+      "url": "https://www.bioethix.com",
+      "telephone": "+91-8069278000",
+      "email": "info@bioethix.com",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Sattva Mind Comp Tech Park, Ground Floor, Office 1, 149-A, EPIP II Phase, Whitefield Industrial Area",
+        "addressLocality": "Bengaluru",
+        "postalCode": "560066",
+        "addressCountry": "IN"
+      },
+      "openingHours": "Mo-Fr 09:00-18:00"
+    }
+    </script>
+
+    <link rel="stylesheet" href="../styles/style.css">
+</head>
+<body>
+    <header class="site-header">
+        <div class="brand">
+            <img src="../assets/images/logo.jpeg" alt="BioEthix Logo">
+            <div>
+                <p>Caring For</p>
+                <h1>Contact Us</h1>
+            </div>
+        </div>
+        <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        <nav class="site-nav">
+            <a href="index.html">Home</a>
+            <a href="about.html">About Us</a>
+            <a href="products.html">Products</a>
+            <a href="contact.html" class="active">Contact</a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="page-section page-intro">
+            <div>
+                <span class="eyebrow">Get in Touch</span>
+                <h2>We’re here to help with inquiries and support.</h2>
+                <p>Contact BioEthix for product information, distribution, or corporate queries.</p>
+            </div>
+        </section>
+
+        <section class="contact-form-section">
+            <div class="form-container">
+                <h2>Send us a Message</h2>
+                <p>Fill out the form below and our team will get back to you as soon as possible.</p>
+                
+                <form id="contactForm" class="contact-form" novalidate>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="fullName">Full Name <span class="required">*</span></label>
+                            <input type="text" id="fullName" name="fullName" required placeholder="Your full name">
+                            <span class="error-message" id="fullNameError"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email Address <span class="required">*</span></label>
+                            <input type="email" id="email" name="email" required placeholder="your.email@example.com">
+                            <span class="error-message" id="emailError"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" id="phone" name="phone" placeholder="+91-8069278000">
+                            <span class="error-message" id="phoneError"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="inquiryType">Inquiry Type <span class="required">*</span></label>
+                            <select id="inquiryType" name="inquiryType" required>
+                                <option value="">Select an inquiry type</option>
+                                <option value="product">Product Information</option>
+                                <option value="distribution">Distribution Partnership</option>
+                                <option value="corporate">Corporate Query</option>
+                                <option value="other">Other</option>
+                            </select>
+                            <span class="error-message" id="inquiryTypeError"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="subject">Subject <span class="required">*</span></label>
+                        <input type="text" id="subject" name="subject" required placeholder="What is this about?">
+                        <span class="error-message" id="subjectError"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="message">Message <span class="required">*</span></label>
+                        <textarea id="message" name="message" required placeholder="Please provide details about your inquiry..." rows="6"></textarea>
+                        <span class="error-message" id="messageError"></span>
+                    </div>
+
+                    <div class="form-group checkbox-group">
+                        <label>
+                            <input type="checkbox" id="terms" name="terms" required>
+                            <span>I agree to the terms and privacy policy</span>
+                        </label>
+                        <span class="error-message" id="termsError"></span>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-submit">Send Message</button>
+                    <div id="formMessage" class="form-message"></div>
+                </form>
+            </div>
+
+            <div class="contact-info">
+                <h3>Contact Information</h3>
+                
+                <article>
+                    <h4>Corporate Office</h4>
+                    <p>Sattva Mind Comp Tech Park, Ground Floor, Office 1, 149-A, EPIP II Phase, Whitefield Industrial Area, Bengaluru – 560 066, India.</p>
+                </article>
+                
+                <article>
+                    <h4>Phone</h4>
+                    <p><a href="tel:+918069278000">+91-8069278000</a></p>
+                    <p><small>Open Monday to Friday, 9am to 6pm IST</small></p>
+                </article>
+                
+                <article>
+                    <h4>Email</h4>
+                    <p><a href="#" id="emailLink" data-email="aW5mb0BiZW9ldGhpeC5jb20=" rel="noopener noreferrer">[Protected Email]</a></p>
+                    <p><small>We respond within 24 hours</small></p>
+                </article>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div>
+            <h3>Quick Contacts</h3>
+            <p>If you have any questions or need help, feel free to contact our team.</p>
+            <p><a href="tel:8069278000">+91-8069278000</a></p>
+        </div>
+        <div class="footer-links">
+            <a href="#">Terms of Use</a>
+            <a href="#">Disclaimer</a>
+        </div>
+    </footer>
+    <script src="../scripts/script.js"></script>
+</body>
+</html>
