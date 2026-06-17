@@ -1,3 +1,4 @@
+/* Global reset */
 * {
     margin: 0;
     padding: 0;
@@ -14,17 +15,50 @@
     --primary-soft: #346bbf;
     --accent: #82b4ff;
     --border: rgba(90, 160, 255, 0.14);
-    --shadow: 0 24px 50px rgba(0, 0, 0, 0.08);
+    
+    /* Shadow Scale */
+    --shadow-xs: 0 2px 4px rgba(0, 0, 0, 0.04);
+    --shadow-sm: 0 4px 8px rgba(0, 0, 0, 0.06);
+    --shadow-md: 0 8px 16px rgba(0, 0, 0, 0.08);
+    --shadow-lg: 0 16px 32px rgba(0, 0, 0, 0.10);
+    --shadow-xl: 0 24px 48px rgba(0, 0, 0, 0.12);
+    --shadow-2xl: 0 32px 64px rgba(0, 0, 0, 0.14);
+    --shadow: var(--shadow-xl);
 }
 
 html, body {
     width: 100%;
     height: 100%;
     min-height: 100vh;
-    font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     color: var(--text);
     background: var(--bg);
     overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* Prevent horizontal overflow on all containers */
+main, section, article, div, header, footer {
+    max-width: 100vw;
+    overflow-x: visible;
+}
+
+/* Handle long words and URLs */
+p, a, li, h1, h2, h3, h4, h5, h6, span {
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    -ms-word-break: break-all;
+    word-break: break-word;
+    -webkit-hyphens: auto;
+    hyphens: auto;
+}
+
+/* Ensure images never overflow */
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    transition: transform 0.25s ease, filter 0.25s ease;
 }
 
 .page-section {
@@ -86,7 +120,7 @@ a {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 24px 36px;
+    padding: 18px 15px;
     background: rgba(255, 255, 255, 0.96);
     border-bottom: 1px solid var(--border);
     backdrop-filter: blur(10px);
@@ -94,12 +128,43 @@ a {
     top: 0;
     z-index: 1000;
     animation: fadeInDown 0.8s ease both;
+    transition: padding 0.3s ease, background 0.3s ease;
 }
 
-.brand {
+.site-nav {
     display: flex;
+    gap: 32px;
     align-items: center;
-    gap: 16px;
+    transition: all 0.3s ease;
+}
+
+.site-nav a {
+    color: var(--text);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s ease, transform 0.2s ease;
+    padding: 8px 0;
+    position: relative;
+}
+
+.site-nav a:hover {
+    color: var(--primary);
+    transform: translateY(-2px);
+}
+
+.site-nav a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--primary);
+    transition: width 0.3s ease;
+}
+
+.site-nav a:hover::after {
+    width: 100%;
 }
 
 .brand-logo {
@@ -128,7 +193,7 @@ a {
 }
 
 .brand img {
-    width: 72px;
+    width: 60px;
     height: auto;
     object-fit: contain;
     border-radius: 12px;
@@ -142,13 +207,13 @@ a {
 }
 
 .brand p {
-    font-size: 0.95rem;
+    font-size: 0.85rem;
     color: var(--muted);
     margin-bottom: 4px;
 }
 
 .brand h1 {
-    font-size: 1.35rem;
+    font-size: 1.2rem;
     color: #234b86;
 }
 
@@ -234,17 +299,30 @@ a {
     color: rgba(243, 248, 255, 0.82);
 }
 
+/* Hero Section - Grid Layout */
 .hero {
     display: grid;
     grid-template-columns: 1.2fr 0.8fr;
     align-items: center;
-    gap: 40px;
+    gap: 60px; /* Increased from 40px to prevent shadow overlap */
     padding: 72px 36px 48px;
+    position: relative;
+    z-index: 1;
 }
 
 .hero-copy {
     max-width: 620px;
     animation: fadeInUp 0.85s ease both;
+    position: relative;
+    z-index: 2;
+}
+
+.hero-media {
+    display: flex;
+    justify-content: center;
+    animation: fadeInUp 0.8s ease both;
+    position: relative;
+    z-index: 2;
 }
 
 .eyebrow {
@@ -254,6 +332,12 @@ a {
     text-transform: uppercase;
     color: var(--primary);
     margin-bottom: 18px;
+}
+
+/* Ensure hero cards don't overlap with other sections */
+.highlight-card {
+    position: relative;
+    z-index: 3;
 }
 
 .hero-copy h2 {
@@ -316,25 +400,28 @@ a {
     animation: fadeInUp 0.8s ease both;
 }
 
+/* Hero Section Cards */
 .highlight-card {
     width: 100%;
     min-height: 320px;
     padding: 28px;
     border-radius: 30px;
     background: linear-gradient(180deg, #e8f3ff 0%, #ffffff 100%);
-    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.12);
+    box-shadow: var(--shadow-lg);
     display: flex;
     flex-direction: column;
     justify-content: center;
     gap: 16px;
     animation: fadeInUp 0.9s ease both;
     transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+    z-index: 1;
 }
 
 .highlight-card:hover {
     transform: translateY(-4px);
-    box-shadow: 0 28px 60px rgba(90, 160, 255, 0.14);
+    box-shadow: var(--shadow-xl);
     border: 1px solid rgba(90, 160, 255, 0.16);
+    z-index: 2;
 }
 
 .vision-card {
@@ -344,13 +431,14 @@ a {
 
 .vision-card:hover {
     transform: translateY(-4px);
-    box-shadow: 0 22px 44px rgba(90, 160, 255, 0.16);
+    box-shadow: var(--shadow-xl);
 }
 
 .vision-card.pop {
     transform: scale(1.04);
     background: linear-gradient(135deg, #ffffff 0%, #e8f3ff 100%);
-    box-shadow: 0 30px 60px rgba(90, 160, 255, 0.16);
+    box-shadow: var(--shadow-2xl);
+    z-index: 3;
 }
 
 .vision-card.pop span,
@@ -379,30 +467,36 @@ a {
     line-height: 1.8;
 }
 
+/* Overview Section - Grid Layout */
 .overview {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 24px;
+    gap: 32px; /* Increased from 24px for better shadow separation */
     padding: 48px 36px;
+    position: relative;
+    z-index: 1;
 }
 
+/* Overview Articles - Grid Layout */
 .overview article {
     background: #ffffff;
     padding: 28px;
     border-radius: 24px;
-    box-shadow: var(--shadow);
+    box-shadow: var(--shadow-md);
     animation: fadeInUp 0.9s ease both;
     transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+    z-index: 1;
 }
 
 .overview article:hover {
     transform: translateY(-4px);
-    box-shadow: 0 28px 60px rgba(90, 160, 255, 0.12);
+    box-shadow: var(--shadow-lg);
     border: 1px solid rgba(90, 160, 255, 0.16);
+    z-index: 2;
 }
 
 .overview h3 {
-    font-size: 1.15rem;
+    font-size: clamp(1rem, 2.5vw, 1.15rem);
     margin-bottom: 16px;
     color: #234b86;
 }
@@ -425,7 +519,7 @@ a {
 }
 
 .section-header h2 {
-    font-size: 2rem;
+    font-size: clamp(1.5rem, 4vw, 2rem);
     color: #234b86;
     margin-bottom: 12px;
 }
@@ -435,19 +529,20 @@ a {
     line-height: 1.8;
 }
 
+/* Product Groups */
 .product-group {
     margin-bottom: 24px;
     background: var(--surface);
     border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: 20px;
     padding: 20px;
-    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.12);
+    box-shadow: var(--shadow-sm);
     transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
 }
 
 .product-group:hover {
     transform: translateY(-4px);
-    box-shadow: 0 24px 50px rgba(90, 160, 255, 0.14);
+    box-shadow: var(--shadow-md);
     border: 1px solid rgba(90, 160, 255, 0.16);
 }
 
@@ -463,10 +558,11 @@ a {
     margin-bottom: 16px;
 }
 
+/* Product Group Media */
 .product-group-media {
     border-radius: 16px;
     overflow: hidden;
-    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
+    box-shadow: var(--shadow-xs);
     min-height: 120px;
 }
 
@@ -495,12 +591,16 @@ a {
     max-width: 780px;
 }
 
+/* Product Grid - Responsive Layout */
 .product-grid {
     display: grid;
     grid-template-columns: repeat(4, minmax(160px, 1fr));
-    gap: 14px;
+    gap: 20px; /* Increased from 14px for better touch targets and shadow separation */
+    position: relative;
+    z-index: 1;
 }
 
+/* Product Cards - Grid Layout */
 .product-card {
     position: relative;
     background: #ffffff;
@@ -508,11 +608,12 @@ a {
     border-radius: 18px;
     min-height: 260px;
     border: 1px solid rgba(90, 160, 255, 0.12);
-    box-shadow: 0 16px 32px rgba(0, 0, 0, 0.06);
+    box-shadow: var(--shadow-md);
     transition: transform 0.28s ease, box-shadow 0.28s ease, background 0.28s ease;
     cursor: pointer;
     overflow: hidden;
     animation: fadeInUp 0.65s ease both;
+    z-index: 1;
 }
 
 .product-card::before {
@@ -526,8 +627,9 @@ a {
 
 .product-card:hover {
     transform: translateY(-6px) scale(1.01);
-    box-shadow: 0 24px 48px rgba(90, 160, 255, 0.14);
+    box-shadow: var(--shadow-xl);
     background: #f4f8ff;
+    z-index: 2;
 }
 
 .product-card:nth-child(4n+1) {
@@ -549,7 +651,7 @@ a {
 .product-card.expanded {
     transform: scale(1.03);
     z-index: 2;
-    box-shadow: 0 32px 80px rgba(90, 160, 255, 0.22);
+    box-shadow: var(--shadow-2xl);
     background: linear-gradient(180deg, #ffffff 0%, #e9f1ff 100%);
 }
 
@@ -786,26 +888,32 @@ a {
     font-weight: 500;
 }
 
+/* Stats Grid - Responsive Layout */
 .stats {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 20px;
+    gap: 30px; /* Increased from 20px for better shadow separation */
     padding: 0 36px 48px;
+    position: relative;
+    z-index: 1;
 }
 
+/* Stats Cards - Grid Layout */
 .stat-card {
     background: #ffffff;
     border-radius: 24px;
     padding: 28px;
     text-align: center;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.05);
+    box-shadow: var(--shadow-sm);
     transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+    z-index: 1;
 }
 
 .stat-card:hover {
     transform: translateY(-4px);
-    box-shadow: 0 28px 50px rgba(90, 160, 255, 0.12);
+    box-shadow: var(--shadow-md);
     border: 1px solid rgba(90, 160, 255, 0.16);
+    z-index: 2;
 }
 
 .stat-card strong {
@@ -879,26 +987,32 @@ a {
     padding: 48px 36px;
 }
 
+/* Services Grid - Responsive Layout */
 .services-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 24px;
+    gap: 32px; /* Increased from 24px for better shadow separation */
     margin-top: 32px;
+    position: relative;
+    z-index: 1;
 }
 
+/* Service Cards - Grid Layout */
 .service-card {
     background: #ffffff;
     padding: 28px;
     border-radius: 24px;
-    box-shadow: var(--shadow);
+    box-shadow: var(--shadow-md);
     transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
     border: 1px solid transparent;
+    z-index: 1;
 }
 
 .service-card:hover {
     transform: translateY(-4px);
-    box-shadow: 0 28px 60px rgba(90, 160, 255, 0.12);
+    box-shadow: var(--shadow-lg);
     border: 1px solid rgba(90, 160, 255, 0.16);
+    z-index: 2;
 }
 
 .service-card h3 {
@@ -918,26 +1032,32 @@ a {
     background: var(--surface);
 }
 
+/* Offerings Grid - Responsive Layout */
 .offerings-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    gap: 24px;
+    gap: 32px; /* Increased from 24px for better shadow separation */
     margin-top: 32px;
+    position: relative;
+    z-index: 1;
 }
 
+/* Offering Cards - Grid Layout */
 .offering-card {
     background: #ffffff;
     padding: 28px;
     border-radius: 24px;
-    box-shadow: var(--shadow);
+    box-shadow: var(--shadow-md);
     transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
     border: 1px solid transparent;
+    z-index: 1;
 }
 
 .offering-card:hover {
     transform: translateY(-4px);
-    box-shadow: 0 28px 60px rgba(90, 160, 255, 0.12);
+    box-shadow: var(--shadow-lg);
     border: 1px solid rgba(90, 160, 255, 0.16);
+    z-index: 2;
 }
 
 .offering-card h3 {
@@ -1183,25 +1303,28 @@ a {
     gap: 24px;
     height: fit-content;
     animation: fadeInUp 0.9s ease both;
+/* Contact Form Container */
+.form-container {
+    background: #ffffff;
+    padding: 36px;
+    border-radius: 24px;
+    box-shadow: var(--shadow-md);
+    border: 1px solid rgba(90, 160, 255, 0.08);
 }
 
-.contact-info h3 {
-    font-size: 1.4rem;
-    color: #234b86;
-    margin-bottom: 8px;
-}
-
+/* Contact Info Cards */
 .contact-info article {
     background: #ffffff;
     padding: 20px;
     border-radius: 16px;
     border: 1px solid rgba(90, 160, 255, 0.08);
     transition: all 0.25s ease;
+    box-shadow: var(--shadow-xs);
 }
 
 .contact-info article:hover {
     border-color: rgba(90, 160, 255, 0.2);
-    box-shadow: 0 8px 20px rgba(90, 160, 255, 0.08);
+    box-shadow: var(--shadow-sm);
 }
 
 .contact-info h4 {
@@ -1318,47 +1441,32 @@ a {
 /* Standard Desktops (1024px - 1440px) */
 @media (max-width: 1440px) and (min-width: 1024px) {
     .product-grid {
-        grid-template-columns: repeat(4, minmax(140px, 1fr));
+        grid-template-columns: repeat(3, minmax(180px, 1fr)); /* Adjusted to 3 columns */
+        gap: 24px; /* Consistent gap */
+    }
+
+    .services-grid, 
+    .offerings-grid {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Larger min width for cards */
+        gap: 28px; /* Slightly larger gap */
+    }
+
+    .overview {
+        grid-template-columns: repeat(2, 1fr); /* Two columns for overview */
+        gap: 28px;
+    }
+
+    .stats {
+        grid-template-columns: repeat(3, 1fr); /* Keep 3 columns, adjust padding */
+        padding: 0 36px 48px;
+        gap: 28px;
     }
 }
 
 /* Tablets & Small Desktops (768px - 1024px) */
-@media (max-width: 1024px) {
-    .page-section {
-        padding: 56px 28px 28px;
-        margin: 20px 28px;
-        border-radius: 20px;
-    }
+/* Compressed CSS */
+/* gzip -f -c /home/rohil/Code_Repo/Medical Website/styles/style.css > /home/rohil/Code_Repo/Medical Website/styles/style.css.gz */
 
-    .hero {
-        grid-template-columns: 1fr;
-        padding: 56px 28px 40px;
-        gap: 32px;
-    }
-
-    .hero-copy h2 {
-        font-size: clamp(1.5rem, 2.5vw, 2.8rem);
-        max-width: 12ch;
-    }
-
-    .hero-copy p {
-        font-size: 0.95rem;
-    }
-
-    .overview {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 20px;
-        padding: 40px 28px;
-    }
-
-    .overview article {
-        padding: 24px;
-    }
-
-    .product-grid {
-        grid-template-columns: repeat(3, minmax(120px, 1fr));
-        gap: 12px;
-    }
 
     .product-card {
         min-height: 240px;
@@ -1444,7 +1552,6 @@ a {
     .site-nav a:last-child {
         border-bottom: none;
     }
-}
 
 /* Small Tablets (480px - 768px) */
 @media (max-width: 768px) {
@@ -1460,6 +1567,39 @@ a {
         padding: 48px 20px 24px;
         margin: 16px 20px;
         border-radius: 16px;
+    }
+
+    /* Hero Section - Single Column */
+    .hero {
+        grid-template-columns: 1fr; /* Single column layout */
+        gap: 32px;
+        padding: 40px 20px;
+    }
+
+    /* Product Grid - 2 columns */
+    .product-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
+    }
+
+    /* Services & Offerings Grids - Single column */
+    .services-grid,
+    .offerings-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    /* Overview Grid - Single column */
+    .overview {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    /* Stats Grid - Single column */
+    .stats {
+        grid-template-columns: 1fr;
+        gap: 20px;
+        padding: 0 20px 40px;
     }
 
     .site-header {
@@ -1488,8 +1628,16 @@ a {
     }
 
     .nav-toggle {
-        display: flex;
+        display: relative;
         order: 3;
+        padding: 8px;
+        min-width: 48px;
+        min-height: 48px;
+    }
+
+    .nav-toggle span {
+        width: 24px;
+        height: 3px;
     }
 
     .site-nav {
@@ -1498,52 +1646,201 @@ a {
         left: 0;
         right: 0;
         background: #ffffff;
-        padding: 14px 20px;
+        padding: 16px 20px;
         box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
         max-height: 0;
         overflow: hidden;
-        transition: max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+        transition: max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
         flex-direction: column;
         gap: 0;
         width: 100%;
         z-index: 999;
+        opacity: 0;
     }
 
     .site-nav.open {
         max-height: 85vh;
         overflow-y: auto;
+        opacity: 1;
     }
 
     .site-nav a {
-        padding: 10px 0;
+        padding: 14px 0;
+        min-height: 48px;
         border-bottom: 1px solid rgba(90, 160, 255, 0.1);
-        font-size: 0.95rem;
+        font-size: 1rem;
+        transition: color 0.2s ease;
     }
 
     .site-nav a:last-child {
         border-bottom: none;
     }
 
+    /* Touch Target Optimization */
+    .btn, .product-card, .vision-card {
+        min-width: 48px;
+        min-height: 48px;
+        padding: 16px 24px;
+    }
+
+    .btn-submit, #contactForm .btn {
+        width: 100%;
+        padding: 16px;
+        margin: 12px 0;
+    }
+    
+    /* Form Field Optimization */
+    input, textarea, select {
+        min-height: 48px;
+        padding: 14px 16px;
+        font-size: 1rem;
+        width: 100%;
+        border-radius: 8px;
+        border: 1px solid rgba(90, 160, 255, 0.2);
+        background-color: #f8f9fa;
+        transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    input:focus, textarea:focus, select:focus {
+        outline: none;
+        border-color: var(--primary);
+        box-shadow: 0 0 0 3px rgba(90, 160, 255, 0.2);
+    }
+
+    label {
+        font-size: 1rem;
+        margin-bottom: 8px;
+        display: block;
+        font-weight: 600;
+    }
+
+    .error-message {
+        color: #ff4d4f;
+        font-size: 0.85rem;
+        margin-top: 4px;
+        display: block;
+    }
+
+    .btn-submit {
+        background: var(--primary);
+        color: white;
+        border: none;
+        border-radius: 8px;
+        padding: 16px;
+        font-size: 1rem;
+        font-weight: 600;
+        width: 100%;
+        cursor: pointer;
+        transition: background 0.2s ease, transform 0.1s ease;
+    }
+
+    .btn-submit:active {
+        transform: translateY(2px);
+        background: var(--primary-soft);
+    }
+
+    .form-row {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        margin-bottom: 16px;
+    }
+
+    .form-group {
+        margin-bottom: 16px;
+    }
+
+    /* Keyboard-specific styles */
+    input[type="email"] {
+        inputmode: "email";
+    }
+
+    input[type="tel"] {
+        inputmode: "tel";
+    }
+
+    /* Prevent zoom on focus */
+    input, textarea, select {
+        font-size: 1rem !important;
+    }
+
+    /* Visual Feedback */
+    .btn:active, .product-card:active, .vision-card:active {
+        transform: translateY(2px);
+        box-shadow: none;
+    }
+
+    .btn, .product-card, .vision-card {
+        transition: transform 0.1s ease, box-shadow 0.1s ease;
+    }
+
+    /* Remove hover effects on touch devices */
+    .vision-card:hover {
+        transform: none;
+        box-shadow: none;
+    }
+
+    /* Touch spacing refinements */
+    .product-card {
+        margin-bottom: 8px;
+        cursor: pointer;
+    }
+
+    .btn + .btn {
+        margin-top: 8px;
+    }
+
+    .hero-actions .btn:last-child {
+        margin-bottom: 4px;
+    }
+
+    .stat-card {
+        margin-bottom: 8px;
+    }
+
+    .site-nav a {
+        -webkit-tap-highlight-color: rgba(90, 160, 255, 0.15);
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    .checkbox-group label {
+        display: flex;
+        align-items: flex-start;
+        gap: 12px;
+        padding: 4px 0;
+        min-height: 44px;
+    }
+
+    .checkbox-group input[type="checkbox"] {
+        min-width: 22px;
+        min-height: 22px;
+        margin-top: 2px;
+    }
+
     .hero {
-        padding: 40px 20px 24px;
-        gap: 24px;
+        padding: 32px 16px 20px;
+        gap: 20px;
     }
 
     .hero-copy h2 {
         font-size: clamp(1.3rem, 2vw, 2.2rem);
         max-width: 12ch;
-        margin-bottom: 16px;
+        margin-bottom: 12px;
     }
 
     .hero-copy p {
-        font-size: 0.9rem;
-        line-height: 1.6;
-        margin-bottom: 20px;
+        font-size: 0.85rem;
+        line-height: 1.5;
+        margin-bottom: 16px;
     }
 
     .eyebrow {
-        font-size: 0.8rem;
-        margin-bottom: 12px;
+        font-size: 0.75rem;
+        margin-bottom: 10px;
+        letter-spacing: 0.15em;
     }
 
     .hero-actions {
@@ -1555,15 +1852,27 @@ a {
         padding: 12px 20px;
         font-size: 0.95rem;
         width: 100%;
-        border-radius: 28px;
         min-height: 44px;
         touch-action: manipulation;
     }
 
     .highlight-card {
         min-height: 280px;
-        padding: 20px;
-        gap: 12px;
+    }
+
+    /* Mobile readability improvements */
+    p, li, .overview p, .about-content p {
+        line-height: 1.7;
+        margin-bottom: 16px;
+    }
+
+    .section-header p {
+        font-size: 0.9rem;
+        line-height: 1.6;
+    }
+
+    .overview p {
+        font-size: 0.9rem;
     }
 
     .highlight-card span {
@@ -1611,7 +1920,7 @@ a {
     }
 
     .overview h3 {
-        font-size: 1rem;
+        font-size: clamp(0.95rem, 2vw, 1rem);
         margin-bottom: 12px;
     }
 
@@ -1706,6 +2015,12 @@ a {
 
     .footer-links {
         gap: 10px;
+        width: 100%;
+    }
+
+    .footer-links a {
+        display: block;
+        padding: 8px 0;
     }
 
     .about-content p {
@@ -1718,311 +2033,272 @@ a {
     }
 
     .about-company h3 {
-        font-size: 1.3rem;
+        font-size: clamp(1rem, 3vw, 1.3rem);
     }
+    /* Mobile Phones (up to 480px) */
+    @media (max-width: 480px) {
+        html, body {
+            font-size: 14px;
+        }
 
-    .about-company p {
-        font-size: 0.95rem;
+        .page-section {
+            padding: 40px 16px 20px;
+            margin: 12px 16px;
+            border-radius: 14px;
+        }
+
+        .site-header {
+            padding: 12px 16px;
+            gap: 8px;
+        }
+
+        .brand {
+            gap: 10px;
+            min-width: 0;
+        }
+
+        .brand img {
+            width: 40px;
+            flex-shrink: 0;
+        }
+
+        .brand div {
+            min-width: 0;
+        }
+
+        .brand h1 {
+            font-size: 0.9rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .brand p {
+            font-size: 0.75rem;
+            margin-bottom: 2px;
+        }
+
+        .nav-toggle span {
+            width: 22px;
+            height: 2.5px;
+        }
+
+        .site-nav {
+            position: fixed;
+            top: 56px;
+            left: 0;
+            right: 0;
+            background: #ffffff;
+            padding: 12px 16px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+            flex-direction: column;
+            gap: 0;
+            width: 100%;
+            z-index: 999;
+        }
+
+        .site-nav.open {
+            max-height: 85vh;
+            overflow-y: auto;
+        }
+
+        .site-nav a {
+            padding: 8px 0;
+            font-size: 0.9rem;
+        }
+
+        /* Hero Section - Compact Mobile Layout */
+        .hero {
+            padding: 32px 16px 20px;
+            gap: 24px;
+        }
+
+        .hero-copy h2 {
+            font-size: clamp(1.2rem, 1.8vw, 1.8rem);
+            max-width: 12ch;
+            line-height: 1;
+            margin-bottom: 12px;
+        }
+
+        .hero-copy p {
+            font-size: 0.85rem;
+            line-height: 1.5;
+            margin-bottom: 16px;
+        }
+
+        .eyebrow {
+            font-size: 0.75rem;
+            margin-bottom: 10px;
+            letter-spacing: 0.15em;
+        }
+
+        .hero-actions {
+            gap: 10px;
+        }
+
+        .btn {
+            padding: 11px 18px;
+            font-size: 0.9rem;
+            width: 100%;
+            border-radius: 24px;
+            min-height: 40px;
+            font-weight: 600;
+        }
+
+        .highlight-card {
+            min-height: 240px;
+            padding: 16px;
+            border-radius: 12px;
+        }
+
+        .highlight-card span {
+            font-size: 0.8rem;
+        }
+
+        .highlight-card p {
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        .highlight-card img {
+            max-height: 120px;
+            object-fit: cover;
+        }
+
+        /* Product Grid - 2 columns with tighter spacing */
+        .product-grid {
+            grid-template-columns: repeat(2, 1fr);
+            gap: 8px;
+        }
+
+        .product-card {
+            min-height: 200px;
+            padding: 8px;
+            border-radius: 12px;
+        }
+
+        .product-card h4 {
+            font-size: 0.9rem;
+            margin-bottom: 4px;
+        }
+
+        .product-card p {
+            font-size: 0.75rem;
+            line-height: 1.4;
+        }
+
+        .product-card > img {
+            height: 80px;
+            margin-bottom: 8px;
+        }
+
+        /* Services & Offerings - Single column with tighter spacing */
+        .services-grid,
+        .offerings-grid {
+            grid-template-columns: 1fr;
+            gap: 12px;
+        }
+
+        .service-card,
+        .offering-card {
+            padding: 16px;
+            border-radius: 12px;
+        }
+
+        .service-card h3,
+        .offering-card h3 {
+            font-size: 1rem;
+            margin-bottom: 8px;
+        }
+
+        .service-card p,
+        .offering-card p {
+            font-size: 0.85rem;
+            line-height: 1.5;
+        }
+
+        /* Overview Grid - Single column with tighter spacing */
+        .overview {
+            grid-template-columns: 1fr;
+            padding: 32px 16px;
+            gap: 12px;
+        }
+
+        .overview article {
+            padding: 16px;
+            border-radius: 12px;
+        }
+
+        .overview h3 {
+            font-size: 0.95rem;
+            margin-bottom: 10px;
+        }
+
+        .overview p {
+            font-size: 0.85rem;
+            line-height: 1.5;
+        }
+
+        /* Stats Grid - Single column with tighter spacing */
+        .stats {
+            padding: 0 16px 32px;
+            gap: 12px;
+        }
+
+        .stat-card {
+            padding: 16px;
+            border-radius: 12px;
+        }
+
+        .stat-card strong {
+            font-size: 1.8rem;
+            margin-bottom: 6px;
+        }
+
+        .stat-card p {
+            font-size: 0.85rem;
+        }
+
+        .stat-card img {
+            max-height: 70px;
+            margin-bottom: 10px;
+        }
+
+        .site-footer {
+            padding: 20px 16px;
+            gap: 12px;
+        }
+
+        .site-footer h3 {
+            font-size: 1rem;
+            margin-bottom: 8px;
+        }
+
+        .site-footer p,
+        .site-footer a {
+            font-size: 0.85rem;
+            line-height: 1.5;
+        }
+
+        /* Mobile overflow prevention */
+        @media (max-width: 768px) {
+            main, section, article, div {
+                overflow-x: hidden;
+                max-width: 100vw;
+            }
+
+            .site-header {
+                overflow: visible;
+                position: sticky;
+            }
+        }
+    }
+    * {
+        transition: none !important;
+        animation: none !important;
     }
 }
-
-/* Mobile Phones (up to 480px) */
-@media (max-width: 480px) {
-    html, body {
-        font-size: 14px;
-    }
-
-    .page-section {
-        padding: 40px 16px 20px;
-        margin: 12px 16px;
-        border-radius: 14px;
-    }
-
-    .site-header {
-        padding: 12px 16px;
-        gap: 8px;
-    }
-
-    .brand {
-        gap: 10px;
-        min-width: 0;
-    }
-
-    .brand img {
-        width: 40px;
-        flex-shrink: 0;
-    }
-
-    .brand div {
-        min-width: 0;
-    }
-
-    .brand h1 {
-        font-size: 0.9rem;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-    }
-
-    .brand p {
-        font-size: 0.75rem;
-        margin-bottom: 2px;
-    }
-
-    .nav-toggle span {
-        width: 22px;
-        height: 2.5px;
-    }
-
-    .site-nav {
-        position: fixed;
-        top: 56px;
-        left: 0;
-        right: 0;
-        background: #ffffff;
-        padding: 12px 16px;
-        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
-        max-height: 0;
-        overflow: hidden;
-        transition: max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-        flex-direction: column;
-        gap: 0;
-        width: 100%;
-        z-index: 999;
-    }
-
-    .site-nav.open {
-        max-height: 85vh;
-        overflow-y: auto;
-    }
-
-    .site-nav a {
-        padding: 8px 0;
-        font-size: 0.9rem;
-    }
-
-    .hero {
-        padding: 32px 16px 20px;
-        gap: 20px;
-    }
-
-    .hero-copy h2 {
-        font-size: clamp(1.2rem, 1.8vw, 1.8rem);
-        max-width: 12ch;
-        line-height: 1;
-        margin-bottom: 12px;
-    }
-
-    .hero-copy p {
-        font-size: 0.85rem;
-        line-height: 1.5;
-        margin-bottom: 16px;
-    }
-
-    .eyebrow {
-        font-size: 0.75rem;
-        margin-bottom: 10px;
-        letter-spacing: 0.15em;
-    }
-
-    .hero-actions {
-        gap: 10px;
-    }
-
-    .btn {
-        padding: 11px 18px;
-        font-size: 0.9rem;
-        width: 100%;
-        border-radius: 24px;
-        min-height: 40px;
-        font-weight: 600;
-    }
-
-    .highlight-card {
-        min-height: 240px;
-        padding: 16px;
-        border-radius: 12px;
-    }
-
-    .highlight-card span {
-        font-size: 0.8rem;
-    }
-
-    .highlight-card p {
-        font-size: 0.9rem;
-        line-height: 1.5;
-    }
-
-    .highlight-card img {
-        max-height: 120px;
-        object-fit: cover;
-    }
-
-    .about-section,
-    .services-section,
-    .offerings-section {
-        padding: 32px 16px;
-    }
-
-    .services-grid,
-    .offerings-grid {
-        gap: 12px;
-        margin-top: 16px;
-    }
-
-    .service-card,
-    .offering-card {
-        padding: 16px;
-        border-radius: 12px;
-    }
-
-    .service-card h3,
-    .offering-card h3 {
-        font-size: 1rem;
-        margin-bottom: 8px;
-    }
-
-    .service-card p,
-    .offering-card p {
-        font-size: 0.85rem;
-        line-height: 1.5;
-    }
-
-    .overview {
-        grid-template-columns: 1fr;
-        padding: 32px 16px;
-        gap: 12px;
-    }
-
-    .overview article {
-        padding: 16px;
-        border-radius: 12px;
-    }
-
-    .overview h3 {
-        font-size: 0.95rem;
-        margin-bottom: 10px;
-    }
-
-    .overview p {
-        font-size: 0.85rem;
-        line-height: 1.5;
-    }
-
-    .product-section {
-        padding: 16px 16px 32px;
-    }
-
-    .section-header {
-        margin-bottom: 16px;
-    }
-
-    .section-header h2 {
-        font-size: 1.25rem;
-        margin-bottom: 6px;
-    }
-
-    .section-header p {
-        font-size: 0.85rem;
-    }
-
-    .product-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 8px;
-    }
-
-    .product-card {
-        min-height: 200px;
-        padding: 8px;
-        border-radius: 12px;
-    }
-
-    .product-card h4 {
-        font-size: 0.9rem;
-        margin-bottom: 4px;
-    }
-
-    .product-card p {
-        font-size: 0.75rem;
-        line-height: 1.4;
-    }
-
-    .product-card > img {
-        height: 80px;
-        margin-bottom: 8px;
-    }
-
-    .product-card:expanded {
-        min-height: 240px;
-    }
-
-    .stats {
-        padding: 0 16px 32px;
-        gap: 12px;
-    }
-
-    .stat-card {
-        padding: 16px;
-        border-radius: 12px;
-    }
-
-    .stat-card strong {
-        font-size: 1.8rem;
-        margin-bottom: 6px;
-    }
-
-    .stat-card p {
-        font-size: 0.85rem;
-    }
-
-    .stat-card img {
-        max-height: 70px;
-        margin-bottom: 10px;
-    }
-
-    .site-footer {
-        padding: 20px 16px;
-        gap: 12px;
-    }
-
-    .site-footer h3 {
-        font-size: 1rem;
-        margin-bottom: 8px;
-    }
-
-    .site-footer p,
-    .site-footer a {
-        font-size: 0.85rem;
-        line-height: 1.5;
-    }
-
-    .footer-links {
-        gap: 8px;
-        width: 100%;
-    }
-
-    .footer-links a {
-        display: block;
-        padding: 8px 0;
-    }
-
-    .about-content p {
-        font-size: 0.9rem;
-        line-height: 1.6;
-        margin-bottom: 16px;
-    }
-
-    .about-company {
-        padding: 32px 16px;
-    }
-
-    .about-company h3 {
-        font-size: 1.2rem;
-        margin-bottom: 12px;
-    }
-
-    .about-company p {
-        font-size: 0.9rem;
-        line-height: 1.6;
-    }
-}
+ }

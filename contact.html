@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0, user-scalable=yes">
     <title>Contact Us | BioEthix Pharmaceuticals – Bengaluru, India</title>
     <meta name="description" content="Contact BioEthix Pharmaceuticals for product inquiries, distribution partnerships, or corporate queries. Call +91-8069278000 or email info@bioethix.com.">
     <meta name="robots" content="index, follow">
@@ -42,12 +42,21 @@
     }
     </script>
 
+    <!-- Preload critical resources -->
+    <link rel="preload" href="../styles/style.css" as="style">
+    <link rel="preload" href="../scripts/script.js" as="script">
+
     <link rel="stylesheet" href="../styles/style.css">
-</head>
-<body>
+    <noscript>
+        <div style="background: #fff3cd; padding: 12px; text-align: center; border-bottom: 2px solid #ffc107;">
+            Your browser does not support JavaScript. Some features may be limited.
+        </div>
+    </noscript>
+    </head>
+    <body>
     <header class="site-header">
         <a href="index.html" class="brand-logo">
-            <img src="../assets/images/logo.jpeg" alt="BioEthix Logo">
+            <img src="../assets/images/logo.jpeg" loading="lazy" alt="BioEthix Logo">
             <div>
                 <p>Caring For</p>
                 <h1>Contact Us</h1>
@@ -80,16 +89,16 @@
                 <h2>Send us a Message</h2>
                 <p>Fill out the form below and our team will get back to you as soon as possible.</p>
                 
-                <form id="contactForm" class="contact-form" novalidate>
+                <form id="contactForm" class="contact-form" action="#" method="POST" novalidate>
                     <div class="form-row">
                         <div class="form-group">
                             <label for="fullName">Full Name <span class="required">*</span></label>
-                            <input type="text" id="fullName" name="fullName" required placeholder="Your full name">
+                            <input type="text" id="fullName" name="fullName" autocomplete="name" inputmode="text" required placeholder="Your full name">
                             <span class="error-message" id="fullNameError"></span>
                         </div>
                         <div class="form-group">
                             <label for="email">Email Address <span class="required">*</span></label>
-                            <input type="email" id="email" name="email" required placeholder="your.email@example.com">
+                            <input type="email" id="email" name="email" autocomplete="email" inputmode="email" required placeholder="your.email@example.com">
                             <span class="error-message" id="emailError"></span>
                         </div>
                     </div>
@@ -97,7 +106,7 @@
                     <div class="form-row">
                         <div class="form-group">
                             <label for="phone">Phone Number</label>
-                            <input type="tel" id="phone" name="phone" placeholder="+91-8069278000">
+                            <input type="tel" id="phone" name="phone" autocomplete="tel" inputmode="tel" placeholder="+91-8069278000">
                             <span class="error-message" id="phoneError"></span>
                         </div>
                         <div class="form-group">
@@ -115,13 +124,13 @@
 
                     <div class="form-group">
                         <label for="subject">Subject <span class="required">*</span></label>
-                        <input type="text" id="subject" name="subject" required placeholder="What is this about?">
+                        <input type="text" id="subject" name="subject" autocomplete="off" inputmode="text" required placeholder="What is this about?">
                         <span class="error-message" id="subjectError"></span>
                     </div>
 
                     <div class="form-group">
                         <label for="message">Message <span class="required">*</span></label>
-                        <textarea id="message" name="message" required placeholder="Please provide details about your inquiry..." rows="6"></textarea>
+                        <textarea id="message" name="message" autocomplete="off" inputmode="text" required placeholder="Please provide details about your inquiry..." rows="6"></textarea>
                         <span class="error-message" id="messageError"></span>
                     </div>
 
@@ -172,6 +181,14 @@
             <a href="#">Disclaimer</a>
         </div>
     </footer>
+    <script>
+        // Touch vs mouse detection
+        document.documentElement.classList.add('no-touch');
+        window.addEventListener('touchstart', function() {
+            document.documentElement.classList.remove('no-touch');
+            document.documentElement.classList.add('touch');
+        }, { once: true });
+    </script>
     <script src="../scripts/script.js"></script>
 </body>
 </html>

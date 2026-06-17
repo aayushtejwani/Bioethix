@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0, user-scalable=yes">
     <title>About Us | BioEthix Pharmaceuticals – Our Mission &amp; Values</title>
     <meta name="description" content="Learn about BioEthix Pharmaceuticals – a global specialty pharma company founded in 2000, led by NRI entrepreneurs, with operations in India, USA, Africa, and the Middle East.">
     <meta name="robots" content="index, follow">
@@ -38,12 +38,21 @@
     }
     </script>
 
+    <!-- Preload critical resources -->
+    <link rel="preload" href="../styles/style.css" as="style">
+    <link rel="preload" href="../scripts/script.js" as="script">
+
     <link rel="stylesheet" href="../styles/style.css">
-</head>
-<body>
+    <noscript>
+        <div style="background: #fff3cd; padding: 12px; text-align: center; border-bottom: 2px solid #ffc107;">
+            Your browser does not support JavaScript. Some features may be limited.
+        </div>
+    </noscript>
+    </head>
+    <body>
     <header class="site-header">
         <a href="index.html" class="brand-logo">
-            <img src="../assets/images/logo.jpeg" alt="BioEthix Logo">
+            <img src="../assets/images/logo.jpeg" loading="lazy" alt="BioEthix Logo">
             <div>
                 <p>Caring For</p>
                 <h1>Global Health Since 2000</h1>
@@ -109,6 +118,14 @@
             <a href="#">Disclaimer</a>
         </div>
     </footer>
+    <script>
+        // Touch vs mouse detection
+        document.documentElement.classList.add('no-touch');
+        window.addEventListener('touchstart', function() {
+            document.documentElement.classList.remove('no-touch');
+            document.documentElement.classList.add('touch');
+        }, { once: true });
+    </script>
     <script src="../scripts/script.js"></script>
 </body>
 </html>
