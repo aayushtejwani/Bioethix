@@ -98,7 +98,7 @@ function validateForm(form) {
     return isValid;
 }
 
-// Handle form submission
+// Handle form submission - WhatsApp Integration
 function handleFormSubmit(event) {
     event.preventDefault();
     
@@ -136,55 +136,77 @@ function handleFormSubmit(event) {
     
     // Collect form data
     const formData = new FormData(form);
-    const data = {
-        fullName: formData.get('fullName'),
-        email: formData.get('email'),
-        phone: formData.get('phone') || 'Not provided',
-        inquiryType: formData.get('inquiryType'),
-        subject: formData.get('subject'),
-        message: formData.get('message'),
-        timestamp: new Date().toISOString()
-    };
+    const fullName = formData.get('fullName');
+    const email = formData.get('email');
+    const phone = formData.get('phone') || 'Not provided';
+    const inquiryType = formData.get('inquiryType');
+    const subject = formData.get('subject');
+    const message = formData.get('message');
     
-    // Simulate form submission (in production, send to backend)
+    // Format inquiry type for readability
+    const inquiryTypeMap = {
+        'product': 'Product Information',
+        'distribution': 'Distribution Partnership',
+        'corporate': 'Corporate Query',
+        'other': 'Other'
+    };
+    const formattedInquiryType = inquiryTypeMap[inquiryType] || inquiryType;
+    
+    // Construct WhatsApp message
+    const whatsappMessage = `
+📩 *New Contact Form Submission* 📩
+
+👤 *Name:* ${fullName}
+📧 *Email:* ${email}
+📞 *Phone:* ${phone}
+📝 *Inquiry Type:* ${formattedInquiryType}
+📌 *Subject:* ${subject}
+
+💬 *Message:*
+${message}
+
+---
+*Sent via BioEthix Contact Form*
+`;
+    
+    // URL encode the message
+    const encodedMessage = encodeURIComponent(whatsappMessage);
+    
+    // Replace with your actual WhatsApp business number
+    const whatsappNumber = '919649009945'; // +91-9649009945
+    
+    // Construct WhatsApp URL
+    const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
+    
+    // Show success message
+    messageDiv.textContent = 'Thank you! Redirecting to WhatsApp...';
+    messageDiv.classList.add('success');
+    
+    // Reset form
+    form.reset();
+    
+    // Clear field errors
+    document.querySelectorAll('.error-message').forEach(el => {
+        el.textContent = '';
+    });
+    document.querySelectorAll('.form-group').forEach(el => {
+        el.classList.remove('has-error');
+    });
+    document.querySelectorAll('.valid, .invalid').forEach(el => {
+        el.classList.remove('valid', 'invalid');
+    });
+    
+    // Re-enable submit button
+    submitButton.disabled = false;
+    submitButton.textContent = originalText;
+    // Remove loading spinner
+    const spinner = submitButton.querySelector('.loading-spinner');
+    if (spinner) spinner.remove();
+    
+    // Redirect to WhatsApp after a brief delay
     setTimeout(() => {
-        try {
-            // Store in localStorage for demo purposes
-            const submissions = JSON.parse(localStorage.getItem('contactFormSubmissions') || '[]');
-            submissions.push(data);
-            localStorage.setItem('contactFormSubmissions', JSON.stringify(submissions));
-            
-            // Show success message
-            messageDiv.textContent = 'Thank you! Your message has been sent successfully. We will get back to you shortly.';
-            messageDiv.classList.add('success');
-            
-            // Reset form
-            form.reset();
-            
-            // Clear field errors
-            document.querySelectorAll('.error-message').forEach(el => {
-                el.textContent = '';
-            });
-            document.querySelectorAll('.form-group').forEach(el => {
-                el.classList.remove('has-error');
-            });
-            document.querySelectorAll('.valid, .invalid').forEach(el => {
-                el.classList.remove('valid', 'invalid');
-            });
-            
-        } catch (error) {
-            messageDiv.textContent = 'An error occurred. Please try again.';
-            messageDiv.classList.add('error');
-            console.error('Form submission error:', error);
-        } finally {
-            // Re-enable submit button
-            submitButton.disabled = false;
-            submitButton.textContent = originalText;
-            // Remove loading spinner
-            const spinner = submitButton.querySelector('.loading-spinner');
-            if (spinner) spinner.remove();
-        }
-    }, 800);
+        window.open(whatsappUrl, '_blank');
+    }, 1000);
 }
 
 // Setup mobile form enhancements
