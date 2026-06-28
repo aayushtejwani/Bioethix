@@ -46,6 +46,98 @@
     <link rel="preload" href="../scripts/script.js" as="script">
 
     <link rel="stylesheet" href="../styles/style.css">
+    
+    <style>
+        /* CSS overrides to fix layout symmetry, card heights, and element alignment */
+        .product-grid {
+            display: grid !important;
+            grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)) !important;
+            gap: 28px !important;
+            align-items: stretch !important;
+            margin-top: 24px !important;
+        }
+
+        .product-card {
+            display: flex !important;
+            flex-direction: column !important;
+            justify-content: flex-start !important;
+            background: #ffffff !important;
+            border: 1px solid #eef2f6 !important;
+            border-radius: 12px !important;
+            padding: 24px !important;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03) !important;
+            transition: transform 0.25s ease, box-shadow 0.25s ease !important;
+            height: 100% !important;
+            box-sizing: border-box !important;
+            position: relative !important;
+            overflow: hidden !important;
+        }
+
+        .product-card:hover {
+            transform: translateY(-4px) !important;
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.07) !important;
+        }
+
+        /* Perfect horizontal base alignment for product images (box/bottle standard) */
+        .product-card img {
+            width: 100% !important;
+            height: 180px !important;
+            object-fit: contain !important;
+            margin: 0 auto 16px auto !important;
+            display: block !important;
+            background-color: #fafbfc !important;
+            border-radius: 8px !important;
+            padding: 12px !important;
+            box-sizing: border-box !important;
+            mix-blend-mode: multiply !important;
+        }
+
+        /* Standardize title text wrapper block to avoid layout shifts */
+        .product-card h4 {
+            margin: 0 0 8px 0 !important;
+            font-size: 1.2rem !important;
+            font-weight: 700 !important;
+            line-height: 1.3 !important;
+            min-height: 2.6em !important; /* Visual protection for up to 2 lines of text */
+            display: flex !important;
+            align-items: center !important;
+        }
+
+        /* Standardize tagline height boundaries */
+        .product-card .tagline {
+            margin: 0 0 16px 0 !important;
+            font-size: 0.95rem !important;
+            line-height: 1.4 !important;
+            min-height: 2.8em !important; /* Visual protection baseline */
+            display: flex !important;
+            align-items: flex-start !important;
+        }
+
+        /* Clean bottom alignment for ingredients list across all cards */
+        .product-card .ingredients {
+            margin-top: auto !important; /* Pushes ingredients to the absolute bottom of the card */
+            padding-top: 16px !important;
+            border-top: 1px solid #f0f4f8 !important;
+            font-size: 0.85rem !important;
+            line-height: 1.5 !important;
+        }
+
+        /* Custom category badges standard */
+        .category-badge {
+            display: inline-block !important;
+            background-color: #00AEEF !important;
+            color: #ffffff !important;
+            font-size: 0.72rem !important;
+            font-weight: 700 !important;
+            text-transform: uppercase !important;
+            padding: 4px 10px !important;
+            border-radius: 4px !important;
+            margin-bottom: 12px !important;
+            align-self: flex-start !important;
+            letter-spacing: 0.5px !important;
+        }
+    </style>
+
     <noscript>
         <div style="background: #fff3cd; padding: 12px; text-align: center; border-bottom: 2px solid #ffc107;">
             Your browser does not support JavaScript. Some features may be limited.
@@ -96,60 +188,70 @@
                 </div>
                 <div class="product-grid">
                     <div class="product-card">
+                        <span class="category-badge" style="background-color: #e31b23 !important;">WOMEN CARE</span>
                         <img src="../assets/images/qonciv.jpeg" loading="lazy" alt="Qonciv">
                         <h4>Qonciv<span class="trademark">&reg;</span></h4>
                         <p class="tagline">Trust in Male & Female Infertility</p>
                         <p class="ingredients"><strong>Key Ingredients:</strong> Coenzyme Q10 100 mg, Lycopene 5000 mcg, L-arginine, Selenium, Folic acid, Zinc</p>
                     </div>
                     <div class="product-card">
+                        <span class="category-badge" style="background-color: #e31b23 !important;">WOMEN CARE</span>
                         <img src="../assets/images/w2.jpeg" loading="lazy" alt="Gestobe">
                         <h4>Gestobe<span class="trademark">&reg;</span></h4>
                         <p class="tagline">To avoid complications in Gestation</p>
                         <p class="ingredients"><strong>Key Ingredients:</strong> Natural Micronised Progesterone Sustained release 200 mg</p>
                     </div>
                     <div class="product-card">
+                        <span class="category-badge" style="background-color: #e31b23 !important;">WOMEN CARE</span>
                         <img src="../assets/images/w3.jpeg" loading="lazy" alt="IQ-FOL Plus">
                         <h4>IQ-FOL Plus<span class="trademark">&reg;</span></h4>
                         <p class="tagline">For healthy pregnancy outcome</p>
                         <p class="ingredients"><strong>Key Ingredients:</strong> L-Methylfolate Calcium, Methylcobalamin, Pyridoxal 5'-Phosphate, DHA</p>
                     </div>
                     <div class="product-card">
+                        <span class="category-badge" style="background-color: #e31b23 !important;">WOMEN CARE</span>
                         <img src="../assets/images/rojofer_xt.jpeg" loading="lazy" alt="Rojofer">
                         <h4>Rojofer<span class="trademark">&reg;</span> (Tablet)</h4>
                         <p class="tagline">The rapid RBCs generator</p>
                         <p class="ingredients"><strong>Key Ingredients:</strong> Ferrous Ascorbate 100 mg, Folic Acid 1.5mg, Zinc</p>
                     </div>
                     <div class="product-card">
+                        <span class="category-badge" style="background-color: #e31b23 !important;">WOMEN CARE</span>
                         <img src="../assets/images/ovaupp.jpeg" loading="lazy" alt="Ovaupp">
                         <h4>Ovaupp<span class="trademark">&reg;</span></h4>
                         <p class="tagline">The Polycystic Ovary Specialist</p>
                         <p class="ingredients"><strong>Key Ingredients:</strong> Myo-Inositol, D-Chiroinositol, Methyl folate, Seleno methionine, N-Acetyl cysteine, Vitamins</p>
                     </div>
                     <div class="product-card">
+                        <span class="category-badge" style="background-color: #e31b23 !important;">WOMEN CARE</span>
                         <img src="../assets/images/novoperg_xt.jpeg" loading="lazy" alt="Novopreg-OD">
                         <h4>Novopreg-OD<span class="trademark">&reg;</span></h4>
                         <p class="tagline">For pregnancy nausea & morning sickness</p>
                         <p class="ingredients"><strong>Key Ingredients:</strong> Doxylamine Succinate 20 mg, Pyridoxine Hydrochloride 20 mg, Folic Acid 5 mg</p>
                     </div>
                     <div class="product-card">
+                        <span class="category-badge" style="background-color: #e31b23 !important;">WOMEN CARE</span>
                         <img src="../assets/images/dydrogroom.jpeg" loading="lazy" alt="Dydrogroom">
                         <h4>Dydrogroom<span class="trademark">&reg;</span></h4>
                         <p class="tagline">For Hormonal Balance</p>
                         <p class="ingredients"><strong>Key Ingredients:</strong> Dydrogesterone 10 mg</p>
                     </div>
                     <div class="product-card">
+                        <span class="category-badge" style="background-color: #e31b23 !important;">WOMEN CARE</span>
                         <img src="../assets/images/w9.jpeg" loading="lazy" alt="Lilycal">
                         <h4>Lilycal<span class="trademark">&reg;</span></h4>
                         <p class="tagline">Extra care for sufficient Calcium</p>
                         <p class="ingredients"><strong>Key Ingredients:</strong> Calcium Citrate 1000 mg, Magnesium, Zinc, Vitamin D3</p>
                     </div>
                     <div class="product-card">
+                        <span class="category-badge" style="background-color: #e31b23 !important;">WOMEN CARE</span>
                         <img src="../assets/images/w8.jpeg" loading="lazy" alt="Argiluv">
                         <h4>Argiluv<span class="trademark">&reg;</span> (Tablet)</h4>
                         <p class="tagline">Increases Nitric Oxide production</p>
                         <p class="ingredients"><strong>Key Ingredients:</strong> L-Arginine 1000 mg, L-Lysine 200 mg, Zinc 10 mg, Folic Acid 100 mcg</p>
                     </div>
                     <div class="product-card">
+                        <span class="category-badge" style="background-color: #e31b23 !important;">WOMEN CARE</span>
                         <img src="../assets/images/w7.jpeg" loading="lazy" alt="Argiluv Sachet">
                         <h4>Argiluv<span class="trademark">&reg;</span> (Sachet)</h4>
                         <p class="tagline">For healthy pregnancy outcomes</p>
@@ -157,6 +259,7 @@
                     </div>
                 </div>
             </div>
+            
             <div class="product-group">
                 <div class="product-group-intro">
                     <div class="product-group-media">
@@ -169,30 +272,35 @@
                 </div>
                 <div class="product-grid">
                     <div class="product-card">
+                        <span class="category-badge" style="background-color: #00AEEF !important;">KIDS CARE</span>
                         <img src="../assets/images/k2.jpeg" loading="lazy" alt="Zermilac">
                         <h4>Zermilac<span class="trademark">&reg;</span> (Suspension)</h4>
                         <p class="tagline">The Most Dependable Probiotic</p>
                         <p class="ingredients"><strong>Key Ingredients:</strong> Bacillus clausii Spores</p>
                     </div>
                     <div class="product-card">
+                        <span class="category-badge" style="background-color: #00AEEF !important;">KIDS CARE</span>
                         <img src="../assets/images/K1.jpeg" loading="lazy" alt="Nutriluv">
                         <h4>Nutriluv<span class="trademark">&reg;</span> (Softgel)</h4>
                         <p class="tagline">Gut health support for infants and children</p>
                         <p class="ingredients"><strong>Key Ingredients:</strong> Omega-3 Fatty Acids, Green Tea Extract, Ginseng, Ginkgo Biloba, Grape Seed Extract, Multivitamins</p>
                     </div>
                     <div class="product-card">
+                        <span class="category-badge" style="background-color: #00AEEF !important;">KIDS CARE</span>
                         <img src="../assets/images/tinycof_ls.jpeg" loading="lazy" alt="Tinycof-LS">
                         <h4>Ethipod-CV 100<span class="trademark">&reg;</span> (Syrup)</h4>
                         <p class="tagline">For Bronchitis, Tonsillitis, Pharyngitis</p>
                         <p class="ingredients"><strong>Key Ingredients:</strong> Cefpodoxime Proxetil, Potassium Clavulanate</p>
                     </div>
                     <div class="product-card">
+                        <span class="category-badge" style="background-color: #00AEEF !important;">KIDS CARE</span>
                         <img src="../assets/images/nutriluv_gold.jpeg" loading="lazy" alt="Nutriluv Gold">
                         <h4>Nutriluv<span class="trademark">&reg;</span> Gold (Syrup)</h4>
                         <p class="tagline">Regain and maintain Health & Immunity</p>
                         <p class="ingredients"><strong>Key Ingredients:</strong> Multivitamins and Multiminerals complex</p>
                     </div>
                     <div class="product-card">
+                        <span class="category-badge" style="background-color: #00AEEF !important;">KIDS CARE</span>
                         <img src="../assets/images/k5.jpeg" loading="lazy" alt="Rojofer Syrup">
                         <h4>Rojofer<span class="trademark">&reg;</span> (Syrup)</h4>
                         <p class="tagline">The glorious Haematinic</p>
@@ -200,6 +308,7 @@
                     </div>
                 </div>
             </div>
+            
             <div class="product-group">
                 <div class="product-group-intro">
                     <div class="product-group-media">
@@ -212,30 +321,35 @@
                 </div>
                 <div class="product-grid">
                     <div class="product-card">
+                        <span class="category-badge" style="background-color: #2E3192 !important;">BONE & JOINT</span>
                         <img src="../assets/images/b&j3.jpeg" loading="lazy" alt="Lilycal Max">
                         <h4>Lilycal<span class="trademark">&reg;</span> Max (Soft Gel)</h4>
                         <p class="tagline">Reduce risk of osteoporosis & fractures</p>
                         <p class="ingredients"><strong>Key Ingredients:</strong> Omega-3 Fatty Acids (EPA & DHA), Calcitriol, Methylcobalamin, Folic Acid, Boron, Calcium Carbonate</p>
                     </div>
                     <div class="product-card">
+                        <span class="category-badge" style="background-color: #2E3192 !important;">BONE & JOINT</span>
                         <img src="../assets/images/b&j1.jpeg" loading="lazy" alt="Ethi-Joint Pro">
                         <h4>Ethi-Joint Pro<span class="trademark">&reg;</span> (Tablet)</h4>
                         <p class="tagline">Management of Chronic Osteoarticular Disease</p>
                         <p class="ingredients"><strong>Key Ingredients:</strong> Undenatured Collagen Peptide Type II, Rosehip Extract, Sodium Hyaluronate, Curcumin, Chondroitin Sulphate, Glucosamine</p>
                     </div>
                     <div class="product-card">
+                        <span class="category-badge" style="background-color: #2E3192 !important;">BONE & JOINT</span>
                         <img src="../assets/images/b&j2.jpeg" loading="lazy" alt="Ethijoint">
                         <h4>Ethijoint<span class="trademark">&reg;</span></h4>
                         <p class="tagline">Regenerates Cartilage - Restores Mobility</p>
                         <p class="ingredients"><strong>Key Ingredients:</strong> Glucosamine Sulphate 750 mg, Diacerein 50 mg</p>
                     </div>
                     <div class="product-card">
+                        <span class="category-badge" style="background-color: #2E3192 !important;">BONE & JOINT</span>
                         <img src="../assets/images/b&j4.jpeg" loading="lazy" alt="Nor-PGM">
                         <h4>Nor-PGM<span class="trademark">&reg;</span> (Tablets)</h4>
                         <p class="tagline">Maintains relief & delays progression</p>
                         <p class="ingredients"><strong>Key Ingredients:</strong> Pregabalin, Nortriptyline, Mecobalamin</p>
                     </div>
                     <div class="product-card">
+                        <span class="category-badge" style="background-color: #2E3192 !important;">BONE & JOINT</span>
                         <img src="../assets/images/b&j5.jpeg" loading="lazy" alt="EROID">
                         <h4>EROID<span class="trademark">&reg;</span> (Capsule)</h4>
                         <p class="tagline">For various bacterial infections</p>
