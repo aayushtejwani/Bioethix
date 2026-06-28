@@ -63,51 +63,50 @@
     <style>
         /* CSS Overrides to fix word-wrapping, brand alignment, and layout symmetry */
         
-        /* 1. Prevent mid-word splitting globally */
-        h1, h2, h3, h4, h5, h6, p, span, a {
+        /* 1. Prevent mid-word splitting globally for English titles and headings */
+        h1, h2, h3, h4, h5, h6, .brand h1, .hero-copy h2, .service-card h3, .offering-card h3 {
             word-break: keep-all !important;
-            word-wrap: break-word !important;
-            overflow-wrap: break-word !important;
+            word-wrap: normal !important;
+            overflow-wrap: normal !important;
+            hyphens: none !important;
         }
 
-        /* 2. Standardized Header Branding */
+        /* 2. Standardized Header Branding - Locked to a Single Line */
         .brand-logo {
             display: flex !important;
             align-items: center !important;
             text-decoration: none !important;
             gap: 12px !important;
+            flex-shrink: 0 !important;
         }
 
         .brand-logo img {
-            height: 46px !important;
+            height: 44px !important;
             width: auto !important;
             object-fit: contain !important;
         }
 
         .brand {
             display: flex !important;
-            flex-direction: column !important;
-            justify-content: center !important;
+            align-items: center !important;
         }
 
         .brand h1 {
-            font-size: 1.25rem !important;
+            font-size: clamp(1.05rem, 3.2vw, 1.35rem) !important;
             font-weight: 800 !important;
-            color: #2E3192 !important; /* Corporate Navy Blue */
             margin: 0 !important;
-            line-height: 1.1 !important;
-            letter-spacing: 0.3px !important;
-            white-space: nowrap !important;
+            line-height: 1 !important;
+            letter-spacing: 0.2px !important;
+            white-space: nowrap !important; /* Strictly prevents wrapping into vertical lines */
+            display: inline-block !important;
         }
 
-        .brand p {
-            font-size: 0.72rem !important;
-            font-weight: 700 !important;
+        .brand h1 .brand-navy {
+            color: #2E3192 !important; /* Corporate Deep Navy */
+        }
+
+        .brand h1 .brand-cyan {
             color: #00AEEF !important; /* Medical Cyan */
-            margin: 2px 0 0 0 !important;
-            text-transform: uppercase !important;
-            letter-spacing: 1.2px !important;
-            white-space: nowrap !important;
         }
 
         /* 3. Hero Copy Styling & Wrap Fixes */
@@ -121,7 +120,6 @@
             font-weight: 800 !important;
             color: #2E3192 !important;
             margin: 12px 0 20px 0 !important;
-            word-break: keep-all !important;
         }
 
         /* 4. Service and Offering Card Spacing & Baselines */
@@ -184,20 +182,13 @@
             text-align: center !important;
         }
 
-        /* Responsive Navigation spacing adjustment */
+        /* Responsive spacing adjustments */
         @media (max-width: 768px) {
             .site-header {
-                padding: 10px 16px !important;
+                padding: 12px 16px !important;
             }
             .brand-logo img {
                 height: 38px !important;
-            }
-            .brand h1 {
-                font-size: 1.1rem !important;
-            }
-            .brand p {
-                font-size: 0.65rem !important;
-                letter-spacing: 0.8px !important;
             }
         }
     </style>
@@ -213,8 +204,7 @@
         <a href="index.html" class="brand-logo">
             <img src="../assets/images/logo.jpeg" loading="lazy" alt="BioEthix Logo">
             <div class="brand">
-                <h1>BioEthix</h1>
-                <p>Pharmaceuticals</p>
+                <h1><span class="brand-navy">BioEthix</span> <span class="brand-cyan">Pharmaceuticals</span></h1>
             </div>
         </a>
         <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
