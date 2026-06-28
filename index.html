@@ -59,6 +59,149 @@
     <link rel="preload" href="../scripts/script.js" as="script">
 
     <link rel="stylesheet" href="../styles/style.css">
+    
+    <style>
+        /* CSS Overrides to fix word-wrapping, brand alignment, and layout symmetry */
+        
+        /* 1. Prevent mid-word splitting globally */
+        h1, h2, h3, h4, h5, h6, p, span, a {
+            word-break: keep-all !important;
+            word-wrap: break-word !important;
+            overflow-wrap: break-word !important;
+        }
+
+        /* 2. Standardized Header Branding */
+        .brand-logo {
+            display: flex !important;
+            align-items: center !important;
+            text-decoration: none !important;
+            gap: 12px !important;
+        }
+
+        .brand-logo img {
+            height: 46px !important;
+            width: auto !important;
+            object-fit: contain !important;
+        }
+
+        .brand {
+            display: flex !important;
+            flex-direction: column !important;
+            justify-content: center !important;
+        }
+
+        .brand h1 {
+            font-size: 1.25rem !important;
+            font-weight: 800 !important;
+            color: #2E3192 !important; /* Corporate Navy Blue */
+            margin: 0 !important;
+            line-height: 1.1 !important;
+            letter-spacing: 0.3px !important;
+            white-space: nowrap !important;
+        }
+
+        .brand p {
+            font-size: 0.72rem !important;
+            font-weight: 700 !important;
+            color: #00AEEF !important; /* Medical Cyan */
+            margin: 2px 0 0 0 !important;
+            text-transform: uppercase !important;
+            letter-spacing: 1.2px !important;
+            white-space: nowrap !important;
+        }
+
+        /* 3. Hero Copy Styling & Wrap Fixes */
+        .hero-copy {
+            max-width: 620px !important;
+        }
+
+        .hero-copy h2 {
+            font-size: clamp(1.8rem, 4vw, 2.8rem) !important;
+            line-height: 1.25 !important;
+            font-weight: 800 !important;
+            color: #2E3192 !important;
+            margin: 12px 0 20px 0 !important;
+            word-break: keep-all !important;
+        }
+
+        /* 4. Service and Offering Card Spacing & Baselines */
+        .services-grid, .offerings-grid {
+            display: grid !important;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)) !important;
+            gap: 24px !important;
+            align-items: stretch !important;
+        }
+
+        .service-card, .offering-card {
+            display: flex !important;
+            flex-direction: column !important;
+            background: #ffffff !important;
+            border: 1px solid #eef2f6 !important;
+            border-radius: 12px !important;
+            padding: 24px !important;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02) !important;
+            height: 100% !important;
+            box-sizing: border-box !important;
+        }
+
+        .service-card h3, .offering-card h3 {
+            font-size: 1.25rem !important;
+            color: #2E3192 !important;
+            margin: 0 0 12px 0 !important;
+            font-weight: 700 !important;
+        }
+
+        .service-card p, .offering-card p {
+            font-size: 0.95rem !important;
+            line-height: 1.5 !important;
+            color: #4a5568 !important;
+            margin: 0 !important;
+        }
+
+        /* 5. Vision Highlight Card Layout */
+        .vision-card {
+            border-radius: 16px !important;
+            overflow: hidden !important;
+            background: #ffffff !important;
+            border: 1px solid #eef2f6 !important;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04) !important;
+        }
+
+        .vision-card img {
+            width: 100% !important;
+            height: 220px !important;
+            object-fit: cover !important;
+            display: block !important;
+        }
+
+        .vision-card p {
+            padding: 20px !important;
+            margin: 0 !important;
+            font-size: 1rem !important;
+            line-height: 1.5 !important;
+            font-weight: 500 !important;
+            color: #2E3192 !important;
+            text-align: center !important;
+        }
+
+        /* Responsive Navigation spacing adjustment */
+        @media (max-width: 768px) {
+            .site-header {
+                padding: 10px 16px !important;
+            }
+            .brand-logo img {
+                height: 38px !important;
+            }
+            .brand h1 {
+                font-size: 1.1rem !important;
+            }
+            .brand p {
+                font-size: 0.65rem !important;
+                letter-spacing: 0.8px !important;
+            }
+        }
+    </style>
+
     <noscript>
         <div style="background: #fff3cd; padding: 12px; text-align: center; border-bottom: 2px solid #ffc107;">
             Your browser does not support JavaScript. Some features may be limited.
@@ -67,20 +210,20 @@
     </head>
     <body>
     <header class="site-header">
-        <div class="brand-logo">
+        <a href="index.html" class="brand-logo">
             <img src="../assets/images/logo.jpeg" loading="lazy" alt="BioEthix Logo">
-            <div class= "brand">
-                <p>Caring For</p>
-                <h1>Global Health Since 2000</h1>
+            <div class="brand">
+                <h1>BioEthix</h1>
+                <p>Pharmaceuticals</p>
             </div>
-        </div>
+        </a>
         <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
             <span></span>
             <span></span>
             <span></span>
         </button>
         <nav class="site-nav">
-            <a href="index.html">Home</a>
+            <a href="index.html" class="active">Home</a>
             <a href="about.html">About Us</a>
             <a href="products.html">Products</a>
             <a href="contact.html">Contact</a>
@@ -100,7 +243,7 @@
             </div>
             <div class="hero-media">
                 <div class="highlight-card vision-card" role="button" tabindex="0">
-                    <span>Our Vision</span>
+                    <span style="display: block; padding: 12px 20px 4px 20px; font-weight: 700; text-transform: uppercase; font-size: 0.8rem; color: #00AEEF; letter-spacing: 1px;">Our Vision</span>
                     <img src="https://media.istockphoto.com/id/1719539154/photo/home-care-healthcare-professional-hugging-senior-patient.webp?a=1&b=1&s=612x612&w=0&k=20&c=pdv1rxO0rDh42_--sN2nEImQTquD1g3Yu7nlI8EVBBo=" loading="lazy" alt="Healthcare professional caring for a senior patient">
                     <p>To serve global healthcare needs through empathy, innovation and technology.</p>
                 </div>
@@ -126,7 +269,7 @@
             <div class="services-grid">
                 <div class="service-card">
                     <h3>Women Care</h3>
-                    <p>Our Products are dedicated to Complete Women Care Speciality like Fertility, Maternity, Pre & Post Menopause and Harmonel Therapy. We firmly believe in quality of our product.</p>
+                    <p>Our Products are dedicated to Complete Women Care Speciality like Fertility, Maternity, Pre & Post Menopause and Hormonal Therapy. We firmly believe in the quality of our product.</p>
                 </div>
                 <div class="service-card">
                     <h3>Kids Care</h3>
@@ -134,7 +277,7 @@
                 </div>
                 <div class="service-card">
                     <h3>Bones & Joint Health Care</h3>
-                    <p>Bioethix launched many molecules for increasing quality of life in Senior Citizen. We launched Ethijoint CGR, Ethijoint OD, Ethijoint 1500 and various strong Bone & Joints Formulation.</p>
+                    <p>Bioethix launched many molecules for increasing quality of life in Senior Citizens. We launched Ethijoint CGR, Ethijoint OD, Ethijoint 1500 and various strong Bone & Joints Formulations.</p>
                 </div>
             </div>
         </section>
@@ -146,7 +289,7 @@
             </article>
             <article>
                 <h3>Corporate Social Responsibility</h3>
-                <p>At BioEthix Pharmaceuticals, we believe that contributing back to the society is not only a RESPONSIBILITY but a COMMITMENT. Our little value addition to the betterment of society is a part of our mission, in line with our commitment to human health.</p>
+                <p>At BioEthix Pharmaceuticals, we believe that contributing back to society is not only a RESPONSIBILITY but a COMMITMENT. Our little value addition to the betterment of society is a part of our mission, in line with our commitment to human health.</p>
             </article>
             <article>
                 <h3>Our Values</h3>
@@ -162,23 +305,23 @@
             <div class="offerings-grid">
                 <div class="offering-card">
                     <h3>Berycare</h3>
-                    <p>We are First of its Kinds to Introduce Berycare, innovative Formula to treat Pre menstural Syndrome.</p>
+                    <p>We are the first of its kind to introduce Berycare, an innovative formula to treat Premenstrual Syndrome.</p>
                 </div>
                 <div class="offering-card">
                     <h3>Ovaupp</h3>
-                    <p>We are first ever to Introduce Ovaupp, first of its kind to treat PCOS.</p>
+                    <p>We are the first ever to introduce Ovaupp, first of its kind to treat PCOS.</p>
                 </div>
                 <div class="offering-card">
                     <h3>Calcium Citrate</h3>
-                    <p>We are first to Introduce Calcium Citrate in dispersible and Water Dissolvable Form.</p>
+                    <p>We are the first to introduce Calcium Citrate in dispersible and water-dissolvable form.</p>
                 </div>
                 <div class="offering-card">
                     <h3>Dispersible Diarrhoea Combination</h3>
-                    <p>First to Come With Dispersible Delicious Combination For Diarrhoea Kids.</p>
+                    <p>First to come with a dispersible, delicious combination for diarrhoea in kids.</p>
                 </div>
                 <div class="offering-card">
                     <h3>Bioactive Sugar Free Collagen</h3>
-                    <p>First Bioactive Sugar Free Collagen Peptide therapy.</p>
+                    <p>First bioactive sugar-free collagen peptide therapy.</p>
                 </div>
             </div>
         </section>
