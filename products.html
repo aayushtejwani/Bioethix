@@ -51,6 +51,53 @@
     
     <style>
         /* CSS overrides to fix layout symmetry, card heights, and element alignment */
+        
+        /* 1. Prevent mid-word splitting globally for English titles and headings */
+        h1, h2, h3, h4, h5, h6, .brand h1, .product-group-header h3, .product-card h4 {
+            word-break: keep-all !important;
+            word-wrap: normal !important;
+            overflow-wrap: normal !important;
+            hyphens: none !important;
+        }
+
+        /* 2. Standardized Header Branding - Locked to a Single Line */
+        .brand-logo {
+            display: flex !important;
+            align-items: center !important;
+            text-decoration: none !important;
+            gap: 12px !important;
+            flex-shrink: 0 !important;
+        }
+
+        .brand-logo img {
+            height: 44px !important;
+            width: auto !important;
+            object-fit: contain !important;
+        }
+
+        .brand {
+            display: flex !important;
+            align-items: center !important;
+        }
+
+        .brand h1 {
+            font-size: clamp(1.05rem, 3.2vw, 1.35rem) !important;
+            font-weight: 800 !important;
+            margin: 0 !important;
+            line-height: 1 !important;
+            letter-spacing: 0.2px !important;
+            white-space: nowrap !important; /* Strictly prevents wrapping into vertical lines */
+            display: inline-block !important;
+        }
+
+        .brand h1 .brand-navy {
+            color: #2E3192 !important; /* Corporate Deep Navy */
+        }
+
+        .brand h1 .brand-cyan {
+            color: #00AEEF !important; /* Medical Cyan */
+        }
+
         .product-grid {
             display: grid !important;
             grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)) !important;
@@ -138,6 +185,16 @@
             align-self: flex-start !important;
             letter-spacing: 0.5px !important;
         }
+
+        /* Responsive spacing adjustments */
+        @media (max-width: 768px) {
+            .site-header {
+                padding: 12px 16px !important;
+            }
+            .brand-logo img {
+                height: 38px !important;
+            }
+        }
     </style>
 
     <noscript>
@@ -150,9 +207,8 @@
     <header class="site-header">
         <a href="index.html" class="brand-logo">
             <img src="../assets/images/logo.jpeg" loading="lazy" alt="BioEthix Logo">
-            <div>
-                <p>Caring For</p>
-                <h1>Product Categories</h1>
+            <div class="brand">
+                <h1><span class="brand-navy">BioEthix</span> <span class="brand-cyan">Pharmaceuticals</span></h1>
             </div>
         </a>
         <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
@@ -184,7 +240,7 @@
                     <div class="product-group-media">
                         <img src="https://plus.unsplash.com/premium_photo-1661779396815-56fe1ca9877c?w=1000&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8d29tZW4lMjBoZWFsdGh8ZW58MHx8MHx8fDA%3D" loading="lazy" alt="BioEthix Women Care pharmaceutical products">
                     </div>
-                    <div class="product-group-header">
+                    <div class="product-group-media">
                         <h3>Women Care</h3>
                         <p>Specialized products for women’s health and wellness.</p>
                     </div>
@@ -269,7 +325,7 @@
                     <div class="product-group-media">
                         <img src="https://plus.unsplash.com/premium_photo-1661607536088-cb28f1d110ab?w=1000&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8a2lkcyUyMGhlYWx0aHxlbnwwfHwwfHx8MA%3D%3D" loading="lazy" alt="BioEthix Kids Care pharmaceutical products">
                     </div>
-                    <div class="product-group-header">
+                    <div class="product-group-media">
                         <h3>Kids Care</h3>
                         <p>Gentle, reliable care for children's health and growth.</p>
                     </div>
@@ -319,7 +375,7 @@
                     <div class="product-group-media">
                         <img src="https://media.istockphoto.com/id/1346682277/photo/man-suffering-from-knee-pain-at-home-closeup.webp?a=1&b=1&s=612x612&w=0&k=20&c=OKytBljGHIal00bpKWaJW-bRY1IaavHxUreoV2Kmjd8=" loading="lazy" alt="BioEthix Bone and Joint pharmaceutical products">
                     </div>
-                    <div class="product-group-header">
+                    <div class="product-group-media">
                         <h3>Bone & Joint</h3>
                         <p>Advanced care solutions for bone, joint, and mobility support.</p>
                     </div>
@@ -356,13 +412,13 @@
                 </div>
             </div>
 
-            <!-- 4. RESPIRATORY CARE (NEW) -->
+            <!-- 4. RESPIRATORY CARE -->
             <div class="product-group">
                 <div class="product-group-intro">
                     <div class="product-group-media">
                         <img src="https://images.unsplash.com/photo-1584017911766-d451b3d0e843?w=1000&auto=format&fit=crop&q=60" loading="lazy" alt="BioEthix Respiratory Care products">
                     </div>
-                    <div class="product-group-header">
+                    <div class="product-group-media">
                         <h3>Respiratory Care</h3>
                         <p>Effective relief and clinical care for targeted respiratory and nasal conditions.</p>
                     </div>
@@ -392,13 +448,13 @@
                 </div>
             </div>
 
-            <!-- 5. ANTI BIOTICS (NEW) -->
+            <!-- 5. ANTI BIOTICS -->
             <div class="product-group">
                 <div class="product-group-intro">
                     <div class="product-group-media">
                         <img src="https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=1000&auto=format&fit=crop&q=60" loading="lazy" alt="BioEthix Antibiotics products">
                     </div>
-                    <div class="product-group-header">
+                    <div class="product-group-media">
                         <h3>Anti Biotics</h3>
                         <p>Premium therapeutic formulations for clinical infection control.</p>
                     </div>
